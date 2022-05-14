@@ -11,11 +11,13 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
@@ -49,21 +51,29 @@ public:
     QPushButton *pushButtonCiseau;
     QPushButton *pushButtonNouvellePartie;
     QMenuBar *menubar;
+    QMenu *menuFichier;
+    QMenu *menuAide;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *ChifoumiVue)
     {
         if (ChifoumiVue->objectName().isEmpty())
             ChifoumiVue->setObjectName(QString::fromUtf8("ChifoumiVue"));
-        ChifoumiVue->resize(341, 341);
-        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        ChifoumiVue->resize(360, 348);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(ChifoumiVue->sizePolicy().hasHeightForWidth());
         ChifoumiVue->setSizePolicy(sizePolicy);
-        ChifoumiVue->setMinimumSize(QSize(341, 341));
+        ChifoumiVue->setMinimumSize(QSize(300, 300));
+        ChifoumiVue->setIconSize(QSize(0, 0));
         centralwidget = new QWidget(ChifoumiVue);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
+        centralwidget->setSizePolicy(sizePolicy1);
         verticalLayout = new QVBoxLayout(centralwidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
@@ -72,11 +82,8 @@ public:
         verticalLayoutJoueur->setObjectName(QString::fromUtf8("verticalLayoutJoueur"));
         labelJoueur = new QLabel(centralwidget);
         labelJoueur->setObjectName(QString::fromUtf8("labelJoueur"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Maximum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(labelJoueur->sizePolicy().hasHeightForWidth());
-        labelJoueur->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(labelJoueur->sizePolicy().hasHeightForWidth());
+        labelJoueur->setSizePolicy(sizePolicy);
         QFont font;
         font.setPointSize(10);
         labelJoueur->setFont(font);
@@ -86,8 +93,8 @@ public:
 
         labelScoreJoueur = new QLabel(centralwidget);
         labelScoreJoueur->setObjectName(QString::fromUtf8("labelScoreJoueur"));
-        sizePolicy1.setHeightForWidth(labelScoreJoueur->sizePolicy().hasHeightForWidth());
-        labelScoreJoueur->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(labelScoreJoueur->sizePolicy().hasHeightForWidth());
+        labelScoreJoueur->setSizePolicy(sizePolicy);
         labelScoreJoueur->setFont(font);
         labelScoreJoueur->setAlignment(Qt::AlignCenter);
 
@@ -95,8 +102,8 @@ public:
 
         labelFigureJoueur = new QLabel(centralwidget);
         labelFigureJoueur->setObjectName(QString::fromUtf8("labelFigureJoueur"));
-        sizePolicy1.setHeightForWidth(labelFigureJoueur->sizePolicy().hasHeightForWidth());
-        labelFigureJoueur->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(labelFigureJoueur->sizePolicy().hasHeightForWidth());
+        labelFigureJoueur->setSizePolicy(sizePolicy);
         labelFigureJoueur->setMinimumSize(QSize(75, 75));
         labelFigureJoueur->setMaximumSize(QSize(75, 75));
         labelFigureJoueur->setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));
@@ -114,8 +121,8 @@ public:
 
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
-        sizePolicy1.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
-        label->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         label->setMaximumSize(QSize(55, 55));
         label->setPixmap(QPixmap(QString::fromUtf8(":/images/images/versus_70.png")));
         label->setScaledContents(true);
@@ -131,8 +138,8 @@ public:
         verticalLayoutMachine->setObjectName(QString::fromUtf8("verticalLayoutMachine"));
         labelMachine = new QLabel(centralwidget);
         labelMachine->setObjectName(QString::fromUtf8("labelMachine"));
-        sizePolicy1.setHeightForWidth(labelMachine->sizePolicy().hasHeightForWidth());
-        labelMachine->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(labelMachine->sizePolicy().hasHeightForWidth());
+        labelMachine->setSizePolicy(sizePolicy);
         labelMachine->setFont(font);
         labelMachine->setAlignment(Qt::AlignCenter);
 
@@ -140,8 +147,8 @@ public:
 
         labelScoreMachine = new QLabel(centralwidget);
         labelScoreMachine->setObjectName(QString::fromUtf8("labelScoreMachine"));
-        sizePolicy1.setHeightForWidth(labelScoreMachine->sizePolicy().hasHeightForWidth());
-        labelScoreMachine->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(labelScoreMachine->sizePolicy().hasHeightForWidth());
+        labelScoreMachine->setSizePolicy(sizePolicy);
         labelScoreMachine->setFont(font);
         labelScoreMachine->setAlignment(Qt::AlignCenter);
 
@@ -149,8 +156,8 @@ public:
 
         labelFigureMachine = new QLabel(centralwidget);
         labelFigureMachine->setObjectName(QString::fromUtf8("labelFigureMachine"));
-        sizePolicy1.setHeightForWidth(labelFigureMachine->sizePolicy().hasHeightForWidth());
-        labelFigureMachine->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(labelFigureMachine->sizePolicy().hasHeightForWidth());
+        labelFigureMachine->setSizePolicy(sizePolicy);
         labelFigureMachine->setMinimumSize(QSize(75, 75));
         labelFigureMachine->setMaximumSize(QSize(75, 75));
         labelFigureMachine->setPixmap(QPixmap(QString::fromUtf8(":/images/images/rien_115.png")));
@@ -165,29 +172,26 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        verticalSpacer = new QSpacerItem(20, 28, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
 
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setEnabled(true);
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy2);
+        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy1);
         groupBox->setMinimumSize(QSize(0, 90));
         pushButtonPierre = new QPushButton(groupBox);
         pushButtonPierre->setObjectName(QString::fromUtf8("pushButtonPierre"));
-        pushButtonPierre->setGeometry(QRect(30, 20, 61, 61));
+        pushButtonPierre->setGeometry(QRect(50, 20, 61, 61));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/images/images/pierre_115.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButtonPierre->setIcon(icon);
         pushButtonPierre->setIconSize(QSize(65, 65));
         pushButtonPapier = new QPushButton(groupBox);
         pushButtonPapier->setObjectName(QString::fromUtf8("pushButtonPapier"));
-        pushButtonPapier->setGeometry(QRect(120, 20, 61, 61));
+        pushButtonPapier->setGeometry(QRect(130, 20, 61, 61));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/images/images/papier_115.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButtonPapier->setIcon(icon1);
@@ -211,11 +215,18 @@ public:
         ChifoumiVue->setCentralWidget(centralwidget);
         menubar = new QMenuBar(ChifoumiVue);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 341, 21));
+        menubar->setGeometry(QRect(0, 0, 360, 21));
+        menuFichier = new QMenu(menubar);
+        menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
+        menuAide = new QMenu(menubar);
+        menuAide->setObjectName(QString::fromUtf8("menuAide"));
         ChifoumiVue->setMenuBar(menubar);
         statusbar = new QStatusBar(ChifoumiVue);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         ChifoumiVue->setStatusBar(statusbar);
+
+        menubar->addAction(menuFichier->menuAction());
+        menubar->addAction(menuAide->menuAction());
 
         retranslateUi(ChifoumiVue);
 
@@ -240,6 +251,8 @@ public:
         pushButtonPapier->setText(QString());
         pushButtonCiseau->setText(QString());
         pushButtonNouvellePartie->setText(QCoreApplication::translate("ChifoumiVue", "Nouvelle Partie", nullptr));
+        menuFichier->setTitle(QCoreApplication::translate("ChifoumiVue", "Fichier", nullptr));
+        menuAide->setTitle(QCoreApplication::translate("ChifoumiVue", "Aide", nullptr));
     } // retranslateUi
 
 };

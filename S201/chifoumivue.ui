@@ -6,24 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>341</width>
-    <height>341</height>
+    <width>368</width>
+    <height>352</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>341</width>
-    <height>341</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>ChifoumiVue</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -253,7 +247,7 @@
       <property name="sizeHint" stdset="0">
        <size>
         <width>20</width>
-        <height>28</height>
+        <height>39</height>
        </size>
       </property>
      </spacer>
@@ -286,7 +280,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>39</width>
+           <width>53</width>
            <height>20</height>
           </size>
          </property>
@@ -294,6 +288,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonPierre">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>65</width>
@@ -317,6 +314,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonPapier">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>65</width>
@@ -340,6 +340,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonCiseau">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>65</width>
@@ -368,7 +371,7 @@
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>39</width>
+           <width>52</width>
            <height>20</height>
           </size>
          </property>
@@ -400,7 +403,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>341</width>
+     <width>368</width>
      <height>21</height>
     </rect>
    </property>

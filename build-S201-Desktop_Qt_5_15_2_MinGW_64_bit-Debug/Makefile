@@ -223,6 +223,7 @@ Makefile: ../S201/S201.pro C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/win32-g++/qm
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/qt_config.prf \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/toolchain.prf \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/default_pre.prf \
@@ -251,7 +252,6 @@ Makefile: ../S201/S201.pro C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/win32-g++/qm
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/Qt5Gui.prl \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/Qt5Core.prl \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/qtmain.prl \
-		.qmake.stash \
 		C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/build_pass.prf \
 		../S201/images.qrc
 	$(QMAKE) -o Makefile ..\S201\S201.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -408,6 +408,7 @@ C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/qt_functions.prf:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/qt_config.prf:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/win32-g++/qmake.conf:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/exclusive_builds.prf:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/toolchain.prf:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/default_pre.prf:
@@ -436,7 +437,6 @@ C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/Qt5Widgets.prl:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/Qt5Gui.prl:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/Qt5Core.prl:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/lib/qtmain.prl:
-.qmake.stash:
 C:/Qt/Qt5.15.2/5.15.2/mingw81_64/mkspecs/features/build_pass.prf:
 ../S201/images.qrc:
 qmake: FORCE
