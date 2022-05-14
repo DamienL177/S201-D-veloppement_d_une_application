@@ -27,6 +27,9 @@ public slots:
     void jouerPierre();
     // Le joueur demande à jouer pierre
 
+    // pour afficher l'à propos de
+    void aProposDe();
+
 private:
     Chifoumi * _leModele;
     ChifoumiVue * _laVue;

@@ -1,5 +1,6 @@
 #include "presentation.h"
 #include "chifoumivue.h"
+#include <QMessageBox>
 #include <QDebug>
 
 Presentation::Presentation(Chifoumi *c, QObject *parent)
@@ -79,3 +80,11 @@ void Presentation::jouerPierre()
     _laVue->majInterface(_leModele->getEtat(),_leModele->getCoupJoueur(),_leModele->getCoupMachine(),_leModele->getScoreJoueur(), _leModele->getScoreMachine());
 }
 
+
+void Presentation::aProposDe()
+{
+    //qDebug() << "Test procédure aProposDe" << Qt::endl;
+    QMessageBox msgBox;
+    msgBox.setText("Chifoumi v3 \n09/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
+    msgBox.exec();
+}

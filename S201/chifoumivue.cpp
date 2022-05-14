@@ -1,5 +1,6 @@
 #include "chifoumivue.h"
 #include "ui_chifoumivue.h"
+#include <QDebug>
 
 ChifoumiVue::ChifoumiVue(QMainWindow *parent)
     : QMainWindow(parent)
@@ -20,6 +21,9 @@ void ChifoumiVue::nvlleConnexion(QObject *c)
     QObject::connect(ui->pushButtonCiseau, SIGNAL(clicked()), c, SLOT(jouerCiseau()));
     QObject::connect(ui->pushButtonPapier, SIGNAL(clicked()), c, SLOT(jouerPapier()));
     QObject::connect(ui->pushButtonPierre, SIGNAL(clicked()), c, SLOT(jouerPierre()));
+    // Connection des actions
+    QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
+    QObject::connect(ui->actionAProposDe, SIGNAL(triggered()), c, SLOT(aProposDe()));
 }
 
 void ChifoumiVue::supprConnexion(QObject *c)
@@ -29,6 +33,9 @@ void ChifoumiVue::supprConnexion(QObject *c)
     QObject::disconnect(ui->pushButtonCiseau, SIGNAL(clicked()), c, SLOT(jouerCiseau()));
     QObject::disconnect(ui->pushButtonPapier, SIGNAL(clicked()), c, SLOT(jouerPapier()));
     QObject::disconnect(ui->pushButtonPierre, SIGNAL(clicked()), c, SLOT(jouerPierre()));
+    // Déconnection des actions
+    QObject::disconnect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
+    QObject::disconnect(ui->actionAProposDe, SIGNAL(triggered()), c, SLOT(aProposDe()));
 }
 
 void ChifoumiVue::majInterface(Chifoumi::UnEtat e, Chifoumi::UnCoup coupJoueur, Chifoumi::UnCoup coupMachine, int scoreJoueur, int scoreMachine)
