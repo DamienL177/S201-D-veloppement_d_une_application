@@ -88,7 +88,10 @@ void ChifoumiVue::majInterface(Chifoumi::UnEtat e, Chifoumi::UnCoup coupJoueur, 
             ui->pushButtonPapier->setEnabled(true);
             ui->pushButtonPierre->setEnabled(true);
             break;
+
+        case Chifoumi::partieFinie :
+            ui->pushButtonCiseau->setEnabled(false);             // On désactive les boutons de figures
+            ui->pushButtonPapier->setEnabled(false);
+            ui->pushButtonPierre->setEnabled(false);
     }
 }
-
-

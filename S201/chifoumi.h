@@ -11,7 +11,7 @@ class Chifoumi : public QObject
     ///* Une d�finition de type �num�r�
     public:
         enum UnCoup {pierre = 0, papier = 1, ciseau = 2, rien = 3};
-        enum UnEtat {initial, enCours};
+        enum UnEtat {initial, enCours, partieFinie};
 
     ///* M�thodes du Mod�le
     public:
@@ -29,6 +29,8 @@ class Chifoumi : public QObject
             /* retourne le score du joueur */
         unsigned int getScoreMachine();
             /* retourne le score de la machine */
+        unsigned int getScorePourVictoire();
+            /* retourne le score nécessaire pour gagner */
         char determinerGagnant();
             /* d�termine le gagnant 'J' pour joueur, 'M' pour machine, 'N' pour match nul
                en fonction du dernier coup jou� par chacun d'eux */
@@ -56,6 +58,9 @@ class Chifoumi : public QObject
         void setScoreMachine(unsigned int p_score);
              /* initialise l'attribut coupMachine avec la valeur
                du param�tre p_score */
+        void setScorePourVictoire(unsigned int p_int);
+             /* initialise l'attribut scorePourGagner avec la valeur
+               du paramètre p_int */
 
         // Autres modificateurs
          void majScores(char p_gagnant);
@@ -78,6 +83,7 @@ class Chifoumi : public QObject
         unsigned int scoreMachine;  // score actuel de la Machine
         UnCoup coupJoueur;          // dernier coup jou� par le joueur
         UnCoup coupMachine;         // dernier coup jou� par la machine
+        int scorePourVictoire;      // Le score nécessaire pour gagné
 };
 
 #endif // CHIFOUMI_H

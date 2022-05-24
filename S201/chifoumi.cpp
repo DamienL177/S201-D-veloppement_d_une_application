@@ -16,7 +16,8 @@ Chifoumi::Chifoumi():
     scoreJoueur(0),
     scoreMachine(0),
     coupJoueur(rien),
-    coupMachine(rien)
+    coupMachine(rien),
+    scorePourVictoire(5)
 {
     //ctor
     // partie mod�le
@@ -48,6 +49,11 @@ unsigned int Chifoumi::getScoreJoueur() {
 
 unsigned int Chifoumi::getScoreMachine() {
     return scoreMachine;
+}
+
+unsigned int Chifoumi::getScorePourVictoire()
+{
+    return scorePourVictoire;
 }
 
 char Chifoumi::determinerGagnant()
@@ -109,6 +115,11 @@ void Chifoumi::setScoreJoueur(unsigned int p_score) {
 
 void Chifoumi::setScoreMachine(unsigned int p_score) {
     (*this).scoreMachine = p_score;
+}
+
+void Chifoumi::setScorePourVictoire(unsigned int p_int)
+{
+    (*this).scorePourVictoire = p_int;
 }
 
 void Chifoumi::majScores(char p_gagnant) {
