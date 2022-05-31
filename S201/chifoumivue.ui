@@ -172,7 +172,7 @@
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
+        <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="label">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
@@ -199,6 +199,30 @@
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="labelTpsRestant">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Tps restant(s) :</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelNbTpsRestant">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>30</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -453,21 +477,57 @@
       </layout>
      </widget>
     </item>
-    <item alignment="Qt::AlignRight">
-     <widget class="QPushButton" name="pushButtonNouvellePartie">
-      <property name="maximumSize">
-       <size>
-        <width>80</width>
-        <height>20</height>
-       </size>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
       </property>
-      <property name="text">
-       <string>Nouvelle Partie</string>
-      </property>
-      <property name="default">
-       <bool>true</bool>
-      </property>
-     </widget>
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonPause">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Pause</string>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignRight">
+       <widget class="QPushButton" name="pushButtonNouvellePartie">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Nouvelle Partie</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

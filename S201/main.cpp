@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     // associer la vue à la présentation
     p->setVue(&w);
     // initialiser la vue en conformité avec l'état initial du modèle
-    p->getVue()->majInterface(c->getEtat(),c->getCoupJoueur(),c->getCoupMachine(),c->getScoreJoueur(), c->getScoreMachine());
+    p->getVue()->majInterface(c);
     // connexion des signaux de la vue avec les slots de la présentation
     w.nvlleConnexion(p);
 

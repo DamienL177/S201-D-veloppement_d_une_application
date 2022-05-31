@@ -11,7 +11,7 @@ class Chifoumi : public QObject
     ///* Une d�finition de type �num�r�
     public:
         enum UnCoup {pierre = 0, papier = 1, ciseau = 2, rien = 3};
-        enum UnEtat {initial, enCours, partieFinie};
+        enum UnEtat {initial, enCours, partieFinie, enPause};
 
     ///* M�thodes du Mod�le
     public:
@@ -31,6 +31,10 @@ class Chifoumi : public QObject
             /* retourne le score de la machine */
         unsigned int getScorePourVictoire();
             /* retourne le score nécessaire pour gagner */
+        unsigned int getTpsRestant();
+            /* retourne le temps restant dans la partie */
+        unsigned int getTpsPourFin();
+            /* retourne le temps avant l'arrêt forcé */
         char determinerGagnant();
             /* d�termine le gagnant 'J' pour joueur, 'M' pour machine, 'N' pour match nul
                en fonction du dernier coup jou� par chacun d'eux */
@@ -61,6 +65,9 @@ class Chifoumi : public QObject
         void setScorePourVictoire(unsigned int p_int);
              /* initialise l'attribut scorePourGagner avec la valeur
                du paramètre p_int */
+        void setTpsRestant(unsigned int p_int);
+             /* initialise l'attribut tpsRestant avec la valeur
+               du paramètre p_int */
 
         // Autres modificateurs
          void majScores(char p_gagnant);
@@ -83,7 +90,9 @@ class Chifoumi : public QObject
         unsigned int scoreMachine;  // score actuel de la Machine
         UnCoup coupJoueur;          // dernier coup jou� par le joueur
         UnCoup coupMachine;         // dernier coup jou� par la machine
-        int scorePourVictoire;      // Le score nécessaire pour gagné
+        unsigned int scorePourVictoire;      // Le score nécessaire pour gagné
+        unsigned int tpsRestant;             // Le temps restant dans la partie
+        unsigned int tpsAvantFin;           // Le temps avant la fin de la partie
 };
 
 #endif // CHIFOUMI_H
