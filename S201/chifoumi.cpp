@@ -74,6 +74,11 @@ QString Chifoumi::getNomJoueur()
     return nomJoueur;
 }
 
+int Chifoumi::getNumUtillisateur()
+{
+    return numUtilisateur;
+}
+
 char Chifoumi::determinerGagnant()
 {
     char gagnantARetourner;
@@ -153,6 +158,11 @@ void Chifoumi::setTpsAvantFin(unsigned int p_int)
 void Chifoumi::setNomJoueur(QString p_qstring)
 {
     (*this).nomJoueur = p_qstring;
+}
+
+void Chifoumi::setNumUtilisateur(int p_int)
+{
+    (*this).numUtilisateur = p_int;
 }
 
 void Chifoumi::majScores(char p_gagnant) {

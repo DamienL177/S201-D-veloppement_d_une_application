@@ -37,6 +37,9 @@ private:
     char testVictoireTpsFini();
     // Renvoie le joueur qui a gagné lorsque le temps est fini
 
+    void ajouterPartieBD();
+    // On ajoute la partie finie à la base de données
+
 public slots:
     void nouvellePartie();
     // Le joueur demande à commencer une nouvelle partie

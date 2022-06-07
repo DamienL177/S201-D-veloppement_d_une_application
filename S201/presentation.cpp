@@ -1,6 +1,7 @@
 #include "presentation.h"
 #include "chifoumivue.h"
 #include <QMessageBox>
+#include <QDateTime>
 #include <QDebug>
 
 Presentation::Presentation(Chifoumi *c, QObject *parent)
@@ -69,6 +70,28 @@ char Presentation::testVictoireTpsFini()
     return gagnant;
 }
 
+void Presentation::ajouterPartieBD()
+{
+    // INITIALISATION DES VARIABLES
+    QDateTime *maintenant;
+    QString nomJoueur;
+    int scoreJoueur;
+    QString nomMachine;
+    int scoreMachine;
+
+    // Traitements
+    // On récupère les informations à rentrer dans la base de données
+    maintenant = new QDateTime(QDateTime::currentDateTime());
+    nomJoueur = _leModele->getNomJoueur();
+    scoreJoueur = _leModele->getScoreJoueur();
+    nomMachine = QString("La Machine");
+    scoreMachine = _leModele->getScoreMachine();
+
+    // On demande à rentrer les informations dans la base de données
+    _laBD->ajouterPartie(maintenant, nomJoueur, scoreJoueur, nomMachine, scoreMachine, _leModele->getNumUtillisateur());
+
+}
+
 void Presentation::unJoueurAGagne(char c)
 {
     QMessageBox msgBox; // On prépare le QMessageBox pour afficher le vainqueur
@@ -94,13 +117,15 @@ void Presentation::unJoueurAGagne(char c)
             s.insert(s.size(), " secondes.");
             break;
     }
-    // On arrête le timer
-    _leTimer->stop();
     // On définit le texte du QMessageBox et on l'affiche
     msgBox.setText(s);
     msgBox.exec();
+    // On arrête le timer
+    _leTimer->stop();
     // On modifie l'état du modèle
     _leModele->setEtat(Chifoumi::partieFinie);
+    // On rajoute la partie à la base de données
+    ajouterPartieBD();
 }
 
 void Presentation::leTempsEstFini(char c)
@@ -132,6 +157,8 @@ void Presentation::leTempsEstFini(char c)
     msgBox.exec();
     // On modifie l'état du modèle
     _leModele->setEtat(Chifoumi::partieFinie);
+    // On rajoute la partie à la base de données
+    ajouterPartieBD();
 }
 
 
@@ -207,7 +234,7 @@ void Presentation::aProposDe()
 {
     //qDebug() << "Test procédure aProposDe" << Qt::endl;
     QMessageBox msgBox;
-    msgBox.setText("Chifoumi v7 \n26/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
+    msgBox.setText("Chifoumi v8 \n26/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
     msgBox.exec();
 }
 
@@ -272,10 +299,13 @@ void Presentation::tentativeConnexion(QString nomUtilisateur, QString mdpUtilisa
 {
     //qDebug() << "Test connexion" << Qt::endl;
     bool connexionReussie;
-    connexionReussie = _laBD->tentativeConnexion(nomUtilisateur, mdpUtilisateur);
+    int numUser;
+    connexionReussie = _laBD->tentativeConnexion(nomUtilisateur, mdpUtilisateur, numUser);
     // Si le mot de passe est bon on ferme la fenetre d'identification et on ouvre la page de chifoumi
     if(connexionReussie){
+        // On change de fenetre affichée
         _lIdentification->fermerFenetre();
         _laVue->show();
+        _leModele->setNumUtilisateur(numUser);
     }
 }
