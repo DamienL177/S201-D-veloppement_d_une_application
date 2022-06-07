@@ -4,8 +4,10 @@
 #include <QObject>
 #include <QTimer>
 #include "chifoumi.h"
+#include "parametre.h"
 
 class ChifoumiVue;
+class Parametre;
 class Presentation : public QObject
 {
     Q_OBJECT
@@ -56,10 +58,17 @@ public slots:
     void tempsRestantDiminue();
     // Le temps restant de la partie diminue
 
+    void modificationParametre();
+    // La fenêtre pour modifier les paramètres de jeu va être affichée
+
+    void modifierParametres(QString nomJoueur, int score, int tps);
+    // Les paramètres de jeu vont être modifiés
+
 private:
     Chifoumi * _leModele;
     ChifoumiVue * _laVue;
     QTimer *_leTimer;
+    Parametre *_lesParametres;
 };
 
 #endif // PRESENTATION_H

@@ -544,6 +544,8 @@
     <property name="title">
      <string>Fichier</string>
     </property>
+    <addaction name="actionParametre"/>
+    <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
    <widget class="QMenu" name="menuAide">
@@ -570,6 +572,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionParametre">
+   <property name="text">
+    <string>Paramètre</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>

@@ -35,6 +35,8 @@ class Chifoumi : public QObject
             /* retourne le temps restant dans la partie */
         unsigned int getTpsPourFin();
             /* retourne le temps avant l'arrêt forcé */
+        QString getNomJoueur();
+            /* retourne le nom du joueur */
         char determinerGagnant();
             /* d�termine le gagnant 'J' pour joueur, 'M' pour machine, 'N' pour match nul
                en fonction du dernier coup jou� par chacun d'eux */
@@ -68,6 +70,10 @@ class Chifoumi : public QObject
         void setTpsRestant(unsigned int p_int);
              /* initialise l'attribut tpsRestant avec la valeur
                du paramètre p_int */
+        void setTpsAvantFin(unsigned int p_int);
+            /* Initialise le temps de jeu d'une partie */
+        void setNomJoueur(QString p_qstring);
+            /* Initialise le nom du joueur */
 
         // Autres modificateurs
          void majScores(char p_gagnant);
@@ -93,6 +99,7 @@ class Chifoumi : public QObject
         unsigned int scorePourVictoire;      // Le score nécessaire pour gagné
         unsigned int tpsRestant;             // Le temps restant dans la partie
         unsigned int tpsAvantFin;           // Le temps avant la fin de la partie
+        QString nomJoueur;          // Le nom que le joueur saisi pour jouer
 };
 
 #endif // CHIFOUMI_H

@@ -63,11 +63,12 @@ void Presentation::unJoueurAGagne(char c)
     /* Lorsque quelqu'un gagne :
         On construit le texte à placer dans le QMessageBox
      */
-    QString s = QString("Helas chers joueurs! Temps de jeu fini");
+    QString s = QString("Bravo ");
     QString num;
     switch (c){
         case 'J' :      // Le cas où le joueur gagne
-            s.insert(s.size(), "Vous ! Vous avez gagné avec ");
+            s.insert(s.size(), _leModele->getNomJoueur());
+            s.insert(s.size(), " ! Vous avez gagné avec ");
             s.insert(s.size(), num.setNum(_leModele->getScorePourVictoire()));
             s.insert(s.size(), " points en ");
             s.insert(s.size(), num.setNum(_leModele->getTpsPourFin() - _leModele->getTpsRestant()));
@@ -81,6 +82,8 @@ void Presentation::unJoueurAGagne(char c)
             s.insert(s.size(), " secondes.");
             break;
     }
+    // On arrête le timer
+    _leTimer->stop();
     // On définit le texte du QMessageBox et on l'affiche
     msgBox.setText(s);
     msgBox.exec();
@@ -94,11 +97,12 @@ void Presentation::leTempsEstFini(char c)
     /* Lorsque quelqu'un gagne :
         On construit le texte à placer dans le QMessageBox
      */
-    QString s = QString("Helas chers joueurs! Temps de jeu fini !");
+    QString s = QString("Helas chers joueurs! Temps de jeu fini ! ");
     QString num;
     switch (c){
         case 'J' :      // Le cas où le joueur gagne
-            s.insert(s.size(), "Vous termine toutefois mieux, avec ");
+            s.insert(s.size(), _leModele->getNomJoueur());
+            s.insert(s.size(), " termine toutefois mieux, avec ");
             s.insert(s.size(), num.setNum(_leModele->getScorePourVictoire()));
             s.insert(s.size(), " points !");
             break;
@@ -129,7 +133,9 @@ void Presentation::nouvellePartie()
     _leModele->initScores();        // On repasse les scores à 0
     _leModele->initCoups();         // On repasse les coups à rien
     _leModele->setEtat(Chifoumi::enCours);  // On s'assure que la partie est dans l'état "en cours"
+    _leModele->setTpsRestant(_leModele->getTpsPourFin());  // On remet le temps restant au maximum
     // Modification de l'affichage
+    _laVue->fermerConnexionParam(this);
     _laVue->majInterface(_leModele);
 }
 
@@ -189,7 +195,7 @@ void Presentation::aProposDe()
 {
     //qDebug() << "Test procédure aProposDe" << Qt::endl;
     QMessageBox msgBox;
-    msgBox.setText("Chifoumi v5 \n14/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
+    msgBox.setText("Chifoumi v6 \n24/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
     msgBox.exec();
 }
 
@@ -206,7 +212,7 @@ void Presentation::demandeReprise()
 {
     //qDebug() << "Test Reprise" << Qt::endl;
     _leModele->setEtat(Chifoumi::enCours);
-    _laVue->pauseConnextion(this);
+    _laVue->pauseConnexion(this);
     _laVue->majInterface(_leModele);
     _leTimer->start(1000);
 }
@@ -230,4 +236,22 @@ void Presentation::tempsRestantDiminue()
         char gagnant = testVictoireTpsFini();
         leTempsEstFini(gagnant);
     }
+}
+
+void Presentation::modificationParametre()
+{
+    //qDebug()<< "Test" << Qt::endl;
+    // On créé la boite de dialogue
+    Parametre _lesParametres(this, _laVue);
+    _lesParametres.setFixedSize(296,157);
+    _lesParametres.exec();
+}
+
+void Presentation::modifierParametres(QString nomJoueur, int score, int tps)
+{
+    // On modifie les paramètres dans le modèle
+    _leModele->setNomJoueur(nomJoueur);
+    _leModele->setScorePourVictoire(score);
+    _leModele->setTpsAvantFin(tps);
+    _laVue->majInterface(_leModele);
 }

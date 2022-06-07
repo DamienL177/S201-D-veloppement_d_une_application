@@ -25,6 +25,7 @@ void ChifoumiVue::nvlleConnexion(QObject *c)
     // Connection des actions
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
     QObject::connect(ui->actionAProposDe, SIGNAL(triggered()), c, SLOT(aProposDe()));
+    QObject::connect(ui->actionParametre, SIGNAL(triggered()), c, SLOT(modificationParametre()));
 }
 
 void ChifoumiVue::supprConnexion(QObject *c)
@@ -38,9 +39,10 @@ void ChifoumiVue::supprConnexion(QObject *c)
     // Déconnection des actions
     QObject::disconnect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
     QObject::disconnect(ui->actionAProposDe, SIGNAL(triggered()), c, SLOT(aProposDe()));
+    QObject::disconnect(ui->actionParametre, SIGNAL(triggered()), c, SLOT(modificationParametre()));
 }
 
-void ChifoumiVue::pauseConnextion(QObject *c)
+void ChifoumiVue::pauseConnexion(QObject *c)
 {
     QObject::disconnect(ui->pushButtonPause, SIGNAL(clicked()), c, SLOT(demandeReprise()));
     QObject::connect(ui->pushButtonPause, SIGNAL(clicked()), c, SLOT(demandePause()));
@@ -52,21 +54,33 @@ void ChifoumiVue::repriseConnexion(QObject *c)
     QObject::connect(ui->pushButtonPause, SIGNAL(clicked()), c, SLOT(demandeReprise()));
 }
 
+void ChifoumiVue::fermerConnexionParam(QObject *c)
+{
+    // On ferme la connexion avec la fenêtre de paramètres paramètre
+    QObject::disconnect(ui->actionParametre, SIGNAL(triggered()), c, SLOT(modificationParametre()));
+}
+
 void ChifoumiVue::majInterface(Chifoumi *c)
 {
-    QString s;      // Cette variable nous sert afin de parvenir à afficher les scores des joueurs
+    QString s;      // Cette variable nous sert afin de parvenir à afficher les entier dans des labels
     // On récupère les variables nécessaires à la mise à jour de l'interface
+    QString nomJoueur = c->getNomJoueur();
     Chifoumi::UnEtat e = c->getEtat();
     Chifoumi::UnCoup coupJoueur = c->getCoupJoueur();
     Chifoumi::UnCoup coupMachine = c->getCoupMachine();
     unsigned int scoreJoueur = c->getScoreJoueur();
     unsigned int scoreMachine = c->getScoreMachine();
+    unsigned int tpsPartie = c->getTpsPourFin();
+    unsigned int scoreFin = c->getScorePourVictoire();
     switch (e) {
         case Chifoumi::initial :        // Dans le cas où le jeu est dans l'état initial
             ui->labelFigureJoueur->setPixmap(QPixmap(":images/images/rien_115.png"));       // Les figures reçoivent la pixmap rien
             ui->labelFigureMachine->setPixmap(QPixmap(":images/images/rien_115.png"));
             ui->labelScoreJoueur->setText(s.setNum(0));         // Les scores sont affichés à 0
             ui->labelScoreMachine->setText(s.setNum(0));
+            ui->labelJoueur->setText(nomJoueur);        // Le nom du joueur
+            ui->labelScoreVainqueur->setText(s.setNum(scoreFin));
+            ui->labelNbTpsRestant->setText(s.setNum(tpsPartie));    // Le temps pour la partie
             // On désactive l'accès aux boutons
             ui->pushButtonCiseau->setEnabled(false);
             ui->pushButtonPapier->setEnabled(false);

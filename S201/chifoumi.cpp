@@ -19,7 +19,8 @@ Chifoumi::Chifoumi():
     coupMachine(rien),
     scorePourVictoire(5),
     tpsRestant(30),
-    tpsAvantFin(30)
+    tpsAvantFin(30),
+    nomJoueur(QString("Vous"))
 {
     //ctor
     // partie mod�le
@@ -66,6 +67,11 @@ unsigned int Chifoumi::getTpsRestant()
 unsigned int Chifoumi::getTpsPourFin()
 {
     return tpsAvantFin;
+}
+
+QString Chifoumi::getNomJoueur()
+{
+    return nomJoueur;
 }
 
 char Chifoumi::determinerGagnant()
@@ -137,6 +143,16 @@ void Chifoumi::setScorePourVictoire(unsigned int p_int)
 void Chifoumi::setTpsRestant(unsigned int p_int)
 {
     (*this).tpsRestant = p_int;
+}
+
+void Chifoumi::setTpsAvantFin(unsigned int p_int)
+{
+    (*this).tpsAvantFin = p_int;
+}
+
+void Chifoumi::setNomJoueur(QString p_qstring)
+{
+    (*this).nomJoueur = p_qstring;
 }
 
 void Chifoumi::majScores(char p_gagnant) {
