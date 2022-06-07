@@ -9,7 +9,7 @@ Identification::Identification(Presentation *presentation, QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->pushButtonEntrer, SIGNAL(clicked()), this, SLOT(userTentativeConnexion()));
-    connect(this, SIGNAL(tentativeConnexion(QString, QString)), _laPresentation, SLOT(tentativeConnexion(QString, QString)));
+    connect(this, SIGNAL(tentativeConnexion(QString, QString)), _laPresentation, SLOT(seConnecter(QString, QString)));
 }
 
 Identification::~Identification()
@@ -19,7 +19,7 @@ Identification::~Identification()
 
 void Identification::fermerFenetre()
 {
-    disconnect(this, SIGNAL(tentativeConnexion(QString, QString)), _laPresentation, SLOT(tentativeConnexion(QString, QString)));
+    disconnect(this, SIGNAL(tentativeConnexion(QString, QString)), _laPresentation, SLOT(seConnecter(QString, QString)));
     this->close();
 }
 

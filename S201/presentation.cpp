@@ -2,6 +2,7 @@
 #include "chifoumivue.h"
 #include <QMessageBox>
 #include <QDateTime>
+#include <QTableView>
 #include <QDebug>
 
 Presentation::Presentation(Chifoumi *c, QObject *parent)
@@ -295,7 +296,7 @@ void Presentation::modifierParametres(QString nomJoueur, int score, int tps)
     _laVue->majInterface(_leModele);
 }
 
-void Presentation::tentativeConnexion(QString nomUtilisateur, QString mdpUtilisateur)
+void Presentation::seConnecter(QString nomUtilisateur, QString mdpUtilisateur)
 {
     //qDebug() << "Test connexion" << Qt::endl;
     bool connexionReussie;
@@ -308,4 +309,15 @@ void Presentation::tentativeConnexion(QString nomUtilisateur, QString mdpUtilisa
         _laVue->show();
         _leModele->setNumUtilisateur(numUser);
     }
+}
+
+void Presentation::afficherResultats()
+{
+    //qDebug() << "Test afficherResultats" << Qt::endl;
+    QSqlQueryModel *model = new QSqlQueryModel;   // On créé le modèle
+    QTableView *view = new QTableView;  // On créé la vue
+    // On charge le modèle
+    _laBD->chargerResultats(model);
+    view->setModel(model);
+    view->show();
 }

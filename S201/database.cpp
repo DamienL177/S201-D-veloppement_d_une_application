@@ -26,13 +26,14 @@ void Database::closeDatabase()
 
 bool Database::restoreDatabase()
 {
-    QString requete;
-    bool bdExiste = mydb.isValid();
-    bool tableUtilisateurExiste;
-    bool tablePartieExiste;
-    QStringList list;
-    bool tableModifiee = false;
-    bool tableCreee;
+    QString requete;                // La requete exécutée par le QSqlQuery
+    bool bdExiste = mydb.isValid(); // La base de données existe-t-elle
+    bool tableUtilisateurExiste;    // La table utilisateur existe-t-elle
+    bool tablePartieExiste;         // La table partie existe-t-elle
+    QStringList list;               // La liste qui va recueillir les tables de la bd et les champs de la table partie
+    bool tableModifiee = false;     // La table a-t-elle été modifiée
+    bool tableCreee;                // A-t-on créé la table
+    QSqlQuery query;                // La requete que l'on execute
 
     if(!bdExiste){
         qDebug() << "Base de données non existante" << Qt::endl;
@@ -40,8 +41,8 @@ bool Database::restoreDatabase()
     if(bdExiste){
         // Si la BD existe : on vérifie qu'elle contienne la table
         list = mydb.tables();
-        tableUtilisateurExiste = list.contains(QString("Utilisateur"));
-        tablePartieExiste = list.contains(QString("Partie"));
+        tableUtilisateurExiste = list.contains(NOM_TABLE_UTILISATEUR);
+        tablePartieExiste = list.contains(NOM_TABLE_PARTIE);
     }
 
     // Traitements de la table Utilisateur
@@ -51,7 +52,6 @@ bool Database::restoreDatabase()
     }
     // Si la table n'existe pas on la créé
     if(bdExiste && !tableUtilisateurExiste){
-        QSqlQuery query;
         requete = QString("create table Utilisateur (num int primary key, nom varchar(25), mdp varchar(25), unique (nom))");
         tableCreee = query.exec(requete);
         tableModifiee = true;
@@ -165,4 +165,21 @@ void Database::ajouterPartie(QDateTime *horodatage, QString nomJoueur, int score
     if (!insertionReussie){
         qDebug() << "Problème dans l'insertion de la partie dans la base de données" << Qt::endl;
     }
+}
+
+void Database::chargerResultats(QSqlQueryModel *& model)
+{
+    QString strQuery;       // La requete a exécuter pour récupèrer le modele en QString pour la composer
+    QSqlQuery query;        // La requete QSqlQuery pour construire le modèle
+    // On compose la requete sql
+    strQuery = QString("select nomJHumain, scoreJHumain, nomJMachine, scoreJMachine, scoreJHumain / scoreJMachine as Ratio ");
+    strQuery.insert(strQuery.size(), QString("from Partie where scoreJMachine <> 0 order by Ratio desc limit 10"));
+    //query.prepare(strQuery);        // On place la requête dans le QSqlQuery
+    //query.exec();
+    model->setQuery(strQuery); // On récupère le modèle
+    model->setHeaderData(0, Qt::Horizontal, QString("Nom Joueur"));
+    model->setHeaderData(1, Qt::Horizontal, QString("Score Joueur"));
+    model->setHeaderData(2, Qt::Horizontal, QString("Nom Machine"));
+    model->setHeaderData(3, Qt::Horizontal, QString("Score Machine"));
+    model->setHeaderData(4, Qt::Horizontal, QString("Ratio"));
 }

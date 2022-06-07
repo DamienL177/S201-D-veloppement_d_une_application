@@ -26,6 +26,7 @@ void ChifoumiVue::nvlleConnexion(QObject *c)
     QObject::connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
     QObject::connect(ui->actionAProposDe, SIGNAL(triggered()), c, SLOT(aProposDe()));
     QObject::connect(ui->actionParametre, SIGNAL(triggered()), c, SLOT(modificationParametre()));
+    QObject::connect(ui->actionResultats, SIGNAL(triggered()), c, SLOT(afficherResultats()));
 }
 
 void ChifoumiVue::supprConnexion(QObject *c)
@@ -40,6 +41,7 @@ void ChifoumiVue::supprConnexion(QObject *c)
     QObject::disconnect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
     QObject::disconnect(ui->actionAProposDe, SIGNAL(triggered()), c, SLOT(aProposDe()));
     QObject::disconnect(ui->actionParametre, SIGNAL(triggered()), c, SLOT(modificationParametre()));
+    QObject::disconnect(ui->actionResultats, SIGNAL(triggered()), c, SLOT(afficherResultats()));
 }
 
 void ChifoumiVue::pauseConnexion(QObject *c)

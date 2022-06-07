@@ -545,6 +545,7 @@
      <string>Fichier</string>
     </property>
     <addaction name="actionParametre"/>
+    <addaction name="actionResultats"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -580,6 +581,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionResultats">
+   <property name="text">
+    <string>Resultats</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>

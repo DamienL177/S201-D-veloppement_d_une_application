@@ -71,8 +71,11 @@ public slots:
     void modifierParametres(QString nomJoueur, int score, int tps);
     // Les paramètres de jeu vont être modifiés
 
-    void tentativeConnexion(QString nomUtilisateur, QString mdpUtilisateur);
+    void seConnecter(QString nomUtilisateur, QString mdpUtilisateur);
     // L'utilisateur tente de se connecter
+
+    void afficherResultats();
+    // L'utilisateur veut afficher les resultats
 
 private:
     Chifoumi * _leModele;
