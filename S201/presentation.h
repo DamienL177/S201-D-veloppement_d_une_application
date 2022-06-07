@@ -5,9 +5,12 @@
 #include <QTimer>
 #include "chifoumi.h"
 #include "parametre.h"
+#include "identification.h"
+#include "database.h"
 
 class ChifoumiVue;
 class Parametre;
+class Identification;
 class Presentation : public QObject
 {
     Q_OBJECT
@@ -19,6 +22,7 @@ public:
     ChifoumiVue* getVue();
     void setModele(Chifoumi *m);
     void setVue(ChifoumiVue *v);
+    void connexionUtilisateur();    // On demande à l'utilisateur de se connecter
 
 private:
     void unJoueurAGagne(char c);
@@ -64,11 +68,16 @@ public slots:
     void modifierParametres(QString nomJoueur, int score, int tps);
     // Les paramètres de jeu vont être modifiés
 
+    void tentativeConnexion(QString nomUtilisateur, QString mdpUtilisateur);
+    // L'utilisateur tente de se connecter
+
 private:
     Chifoumi * _leModele;
     ChifoumiVue * _laVue;
     QTimer *_leTimer;
-    Parametre *_lesParametres;
+    Parametre *_lesParametres;      // La page de paramètre
+    Identification *_lIdentification;    // La page d'identification
+    Database *_laBD;        // La base de données
 };
 
 #endif // PRESENTATION_H

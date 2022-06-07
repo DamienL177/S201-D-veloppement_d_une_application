@@ -20,6 +20,6 @@ int main(int argc, char *argv[])
     // connexion des signaux de la vue avec les slots de la présentation
     w.nvlleConnexion(p);
 
-    w.show();
+    p->connexionUtilisateur();
     return a.exec();
 }

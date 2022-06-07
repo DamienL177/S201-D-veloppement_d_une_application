@@ -8,9 +8,13 @@ Presentation::Presentation(Chifoumi *c, QObject *parent)
 {
     _leModele->initCoups();     // On initialise les coups à rien
     _leModele->initScores();    // On initialise les scores à 0
-    _leTimer = new QTimer(this);        // On initialise le timer
+    _leTimer = new QTimer(this);        // On créé le timer
     // On connecte le timer
     _leTimer->connect(_leTimer, SIGNAL(timeout()), this, SLOT(tempsRestantDiminue()));
+    // On créé et on ouvre la base de données
+    _laBD = new Database();
+    _laBD->openDatabase();
+    _laBD->restoreDatabase();
 }
 
 Chifoumi *Presentation::getModele()
@@ -31,6 +35,14 @@ void Presentation::setModele(Chifoumi *m)
 void Presentation::setVue(ChifoumiVue *v)
 {
     _laVue = v;
+}
+
+void Presentation::connexionUtilisateur()
+{
+    // On affiche la page d'identification
+    _lIdentification = new Identification(this);
+    _lIdentification->setFixedSize(239,129);
+    _lIdentification->show();
 }
 
 char Presentation::testVictoire()
@@ -195,7 +207,7 @@ void Presentation::aProposDe()
 {
     //qDebug() << "Test procédure aProposDe" << Qt::endl;
     QMessageBox msgBox;
-    msgBox.setText("Chifoumi v6 \n24/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
+    msgBox.setText("Chifoumi v7 \n26/05/2022 \nJuan David Rodriguez Sinclair \nEsteban Dujardin \nDamien Lanusse \nTDI TP2");
     msgBox.exec();
 }
 
@@ -254,4 +266,16 @@ void Presentation::modifierParametres(QString nomJoueur, int score, int tps)
     _leModele->setScorePourVictoire(score);
     _leModele->setTpsAvantFin(tps);
     _laVue->majInterface(_leModele);
+}
+
+void Presentation::tentativeConnexion(QString nomUtilisateur, QString mdpUtilisateur)
+{
+    //qDebug() << "Test connexion" << Qt::endl;
+    bool connexionReussie;
+    connexionReussie = _laBD->tentativeConnexion(nomUtilisateur, mdpUtilisateur);
+    // Si le mot de passe est bon on ferme la fenetre d'identification et on ouvre la page de chifoumi
+    if(connexionReussie){
+        _lIdentification->fermerFenetre();
+        _laVue->show();
+    }
 }
